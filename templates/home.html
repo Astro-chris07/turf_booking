@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<div class="form-container">
+    <h2>Welcome, {{ username }}</h2>
+    <form method="POST" action="/book">
+        <label for="turf">Select Turf:</label><br>
+        <select name="turf_id" required>
+            {% for turf in turfs %}
+                <option value="{{ turf.turf_id }}">{{ turf.name }} - {{ turf.sport_type }} - ${{ turf.rate_per_hour }}/hr</option>
+            {% endfor %}
+        </select><br><br>
+        <input type="date" name="date" required><br>
+        <input type="time" name="start" required><br>
+        <input type="time" name="end" required><br>
+        <button type="submit">Book</button>
+    </form>
+    <br>
+    <a href="/logout">Logout</a>
+</div>
+</body>
+</html>

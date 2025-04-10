@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Turfs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Inter', sans-serif;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h2 {
+            color: #81C784;
+            margin-bottom: 1rem;
+        }
+
+        .back-btn {
+            background: none;
+            border: 1px solid #333;
+            color: #e0e0e0;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #333;
+        }
+
+        form {
+            background: #1e1e1e;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: none;
+            border-radius: 4px;
+            background: #2a2a2a;
+            color: #fff;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 4px;
+            background-color: #4CAF50;
+            color: #fff;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #66BB6A;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #1e1e1e;
+        }
+
+        th, td {
+            padding: 1rem;
+            border-bottom: 1px solid #333;
+        }
+
+        th {
+            background-color: #4CAF50;
+        }
+
+        tr:hover {
+            background-color: #2a2a2a;
+        }
+
+        .btn-danger {
+            background: #f44336;
+        }
+
+        .btn-danger:hover {
+            background: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header with Back Button -->
+    <div class="header">
+        <h2>Manage Turfs</h2>
+        <a href="/admin_dashboard" class="back-btn">Back to Admin Dashboard</a>
+    </div>
+
+    <!-- Add Turf Form -->
+    <form method="POST" action="/add_turf">
+        <input type="text" name="turf_name" placeholder="Turf Name" required>
+        <select name="available">
+            <option value="1">Available</option>
+            <option value="0">Unavailable</option>
+        </select>
+        <button type="submit" class="btn">Add Turf</button>
+    </form>
+
+    <!-- Existing Turfs Table -->
+    <h2>Existing Turfs</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Turf Name</th>
+                <th>Availability</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for turf in turfs %}
+            <tr>
+                <td>{{ turf.turf_id }}</td>
+                <td>{{ turf.turf_name }}</td>
+                <td>{{ "Yes" if turf.available else "No" }}</td>
+                <td>
+                    <form action="/delete_turf/{{ turf.turf_id }}" method="POST" style="display:inline;">
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
