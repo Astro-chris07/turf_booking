@@ -1,0 +1,5 @@
+flask==2.0.1
+werkzeug==2.0.0  # Specify a compatible version
+flask-mysqldb
+flask-session
+mysql-connector-python

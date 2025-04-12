@@ -2,7 +2,7 @@ import mysql.connector
 from mysql.connector import Error
 
 DB_CONFIG = {
-    'host': 'localhost',
+    'host': 'db',  # ✅ this is the fix
     'user': 'root',
     'password': 'Asher@123',
     'database': 'turf_booking'
@@ -14,5 +14,5 @@ def get_db():
         if connection.is_connected():
             return connection
     except Error as e:
-        print("Error connecting to database", e)
+        print("Error connecting to database:", e)
         return None
